@@ -42,16 +42,16 @@ public class PickerMetricsRestEndPoint {
 	@Value("${wms.service.ready.msg: Event Monitor Service - Not ready yet}")
 	private String readyMsg;
 
-	@GetMapping("/{busName}/{locnNbr}/picks/counter")
-	public ResponseEntity getPickCounter(@PathVariable("busName") String busName,
+	@GetMapping("/{busName}/{locnNbr}/picks/heatmap")
+	public ResponseEntity getPickHeatMap(@PathVariable("busName") String busName,
 			@PathVariable("locnNbr") Integer locnNbr) throws Exception {
 		try {
-			log.info("Received request for pick counter:" + busName + ":" + locnNbr);
-			CounterStat pickHeatMap = pickCounterService.getPickCounts(busName, locnNbr);
-			log.info("Completed request for pick counter:" + busName + ":" + locnNbr + ":" + pickHeatMap);
+			log.info("Received request for getPickHeatMap:" + busName + ":" + locnNbr);
+			CounterStat pickHeatMap = pickCounterService.getPickHeatMap(busName, locnNbr);
+			log.info("Completed request for getPickHeatMap:" + busName + ":" + locnNbr + ":" + pickHeatMap);
 			return ResponseEntity.ok(pickHeatMap);
 		} catch (Exception e) {
-			log.error("Error Occured for pick counter busName:" + busName + ", locnNbr:" + locnNbr + " : "
+			log.error("Error Occured for getPickHeatMap busName:" + busName + ", locnNbr:" + locnNbr + " : "
 					+ e.getMessage());
 			return ResponseEntity.badRequest()
 					.body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -61,21 +61,21 @@ public class PickerMetricsRestEndPoint {
 	}
 
 	@GetMapping("/{busName}/{locnNbr}/picks/picker/stats/{numOfDays}/{numOfTopPerformers}")
-	public ResponseEntity getTopPickersForPast24Hours(@PathVariable("busName") String busName,
+	public ResponseEntity getTopPickersByHour(@PathVariable("busName") String busName,
 			@PathVariable("locnNbr") Integer locnNbr, @PathVariable("numOfDays") Integer numOfDays,
 			@PathVariable("numOfTopPerformers") Integer numOfTopPerformers) throws Exception {
 		try {
-			log.info("Received request for order counter:" + busName + ":" + locnNbr);
+			log.info("Received request for getTopPickersByHour:" + busName + ":" + locnNbr);
 			Map<String, Map<String, Long>> pickHeatMap = orderCounterService
-					.getTopPickPerformersByHourForPast24Hours(busName, locnNbr, numOfDays, numOfTopPerformers);
-			log.info("Completed request for order counter:" + busName + ":" + locnNbr + ":" + pickHeatMap);
+					.getTopPickPerformersByHour(busName, locnNbr, numOfDays, numOfTopPerformers);
+			log.info("Completed request for getTopPickersByHour" + busName + ":" + locnNbr + ":" + pickHeatMap);
 			return ResponseEntity.ok(pickHeatMap);
 		} catch (Exception e) {
-			log.error("Error Occured for order counter busName:" + busName + ", locnNbr:" + locnNbr + " : "
+			log.error("Error Occured for getTopPickersByHour, busName:" + busName + ", locnNbr:" + locnNbr + " : "
 					+ e.getMessage());
 			return ResponseEntity.badRequest()
 					.body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-							"Error Occured while getting order counter for busName:" + busName + ", locnNbr:" + locnNbr
+							"Error Occured while getTopPickersByHour for busName:" + busName + ", locnNbr:" + locnNbr
 									+ " : " + e.getMessage()));
 		}
 	}
@@ -104,17 +104,17 @@ public class PickerMetricsRestEndPoint {
 	public ResponseEntity getTopPickersForCurrentHour(@PathVariable("busName") String busName,
 			@PathVariable("locnNbr") Integer locnNbr) throws Exception {
 		try {
-			log.info("Received request for order counter:" + busName + ":" + locnNbr);
+			log.info("Received request for getTopPickersForCurrentHour:" + busName + ":" + locnNbr);
 			Map<String, Map<String, Long>> pickHeatMap = orderCounterService.getTopPickPerformersForCurrentHour(busName,
 					locnNbr);
-			log.info("Completed request for order counter:" + busName + ":" + locnNbr + ":" + pickHeatMap);
+			log.info("Completed request for getTopPickersForCurrentHour:" + busName + ":" + locnNbr + ":" + pickHeatMap);
 			return ResponseEntity.ok(pickHeatMap);
 		} catch (Exception e) {
-			log.error("Error Occured for order counter busName:" + busName + ", locnNbr:" + locnNbr + " : "
+			log.error("Error Occured for getTopPickersForCurrentHour, busName:" + busName + ", locnNbr:" + locnNbr + " : "
 					+ e.getMessage());
 			return ResponseEntity.badRequest()
 					.body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-							"Error Occured while getting order counter for busName:" + busName + ", locnNbr:" + locnNbr
+							"Error Occured while getting getTopPickersForCurrentHour for busName:" + busName + ", locnNbr:" + locnNbr
 									+ " : " + e.getMessage()));
 		}
 	}

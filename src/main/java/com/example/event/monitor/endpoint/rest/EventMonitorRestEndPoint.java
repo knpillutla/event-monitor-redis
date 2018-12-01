@@ -65,19 +65,19 @@ public class EventMonitorRestEndPoint {
 	}
 
 	@GetMapping("/{busName}/{locnNbr}/orders/backlog")
-	public ResponseEntity getOrderCounter(@PathVariable("busName") String busName,
+	public ResponseEntity getOrderBacklog(@PathVariable("busName") String busName,
 			@PathVariable("locnNbr") Integer locnNbr) throws Exception {
 		try {
-			log.info("Received request for order counter:" + busName + ":" + locnNbr);
+			log.info("Received request for getOrderBacklog:" + busName + ":" + locnNbr);
 			CounterStat pickHeatMap = orderCounterService.getOrderCounts(busName, locnNbr);
-			log.info("Completed request for order counter:" + busName + ":" + locnNbr + ":" + pickHeatMap);
+			log.info("Completed request for getOrderBacklog:" + busName + ":" + locnNbr + ":" + pickHeatMap);
 			return ResponseEntity.ok(pickHeatMap);
 		} catch (Exception e) {
-			log.error("Error Occured for order counter busName:" + busName + ", locnNbr:" + locnNbr + " : "
+			log.error("Error Occured for getOrderBacklog, busName:" + busName + ", locnNbr:" + locnNbr + " : "
 					+ e.getMessage());
 			return ResponseEntity.badRequest()
 					.body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-							"Error Occured while getting order counter for busName:" + busName + ", locnNbr:" + locnNbr
+							"Error Occured while getting getOrderBacklog for busName:" + busName + ", locnNbr:" + locnNbr
 									+ " : " + e.getMessage()));
 		}
 	}
@@ -86,17 +86,17 @@ public class EventMonitorRestEndPoint {
 	public ResponseEntity getHourlyOrderStatistics(@PathVariable("busName") String busName,
 			@PathVariable("locnNbr") Integer locnNbr, @PathVariable("numOfDays") Integer numOfDays) throws Exception {
 		try {
-			log.info("Received request for order counter:" + busName + ":" + locnNbr);
+			log.info("Received request for getHourlyOrderStatistics:" + busName + ":" + locnNbr);
 			Map<String, Map<String, Long>> pickHeatMap = orderCounterService.getOrderHourlyStats(busName, locnNbr,
 					numOfDays);
-			log.info("Completed request for order counter:" + busName + ":" + locnNbr + ":" + pickHeatMap);
+			log.info("Completed request for getHourlyOrderStatistics:" + busName + ":" + locnNbr + ":" + pickHeatMap);
 			return ResponseEntity.ok(pickHeatMap);
 		} catch (Exception e) {
-			log.error("Error Occured for order counter busName:" + busName + ", locnNbr:" + locnNbr + " : "
+			log.error("Error Occured for getHourlyOrderStatistics, busName:" + busName + ", locnNbr:" + locnNbr + " : "
 					+ e.getMessage());
 			return ResponseEntity.badRequest()
 					.body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-							"Error Occured while getting order counter for busName:" + busName + ", locnNbr:" + locnNbr
+							"Error Occured while getting getHourlyOrderStatistics for busName:" + busName + ", locnNbr:" + locnNbr
 									+ " : " + e.getMessage()));
 		}
 	}

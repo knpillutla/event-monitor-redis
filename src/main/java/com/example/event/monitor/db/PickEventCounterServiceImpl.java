@@ -50,7 +50,7 @@ public class PickEventCounterServiceImpl implements PickEventCounterService{
 	}
 	 
 	@Override
-	public CounterStat getPickCounts(String busName, Integer locnNbr) {
+	public CounterStat getPickHeatMap(String busName, Integer locnNbr) {
 		log.info("PickEventCounterServiceImpl::getPickCounts::start");
 		long startTime = System.currentTimeMillis();
 		Map<String, Long> pickCountsAreaMap = redisHashOps.entries(pickCountsKey+busName + locnNbr+"area");

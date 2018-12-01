@@ -166,7 +166,7 @@ public class OrderEventCounterServiceImpl implements OrderEventCounterService {
 	}
 	
 	@Override
-	public Map<String, Map<String, Long>> getTopPickPerformersByHourForPast24Hours(String busName, Integer locnNbr, Integer numOfDays,int numOfTopPerformers) {
+	public Map<String, Map<String, Long>> getTopPickPerformersByHour(String busName, Integer locnNbr, Integer numOfDays,int numOfTopPerformers) {
 		Map<String, Map<String, Long>> hourlySortedPickerMap = new LinkedHashMap();
 
 		List<String> formattedHourList = DateTimeUtil.getFormattedHourListFromDate(numOfDays);
@@ -177,7 +177,7 @@ public class OrderEventCounterServiceImpl implements OrderEventCounterService {
 	}
 	
 	@Override
-	public Map<String, Map<String, Long>> getTopPackPerformersByHourForPast24Hours(String busName, Integer locnNbr, Integer numOfDays,int numOfTopPerformers) {
+	public Map<String, Map<String, Long>> getTopPackPerformersByHour(String busName, Integer locnNbr, Integer numOfDays,int numOfTopPerformers) {
 		Map<String, Map<String, Long>> hourlySortedPickerMap = new LinkedHashMap();
 
 		List<String> formattedHourList = DateTimeUtil.getFormattedHourListFromDate(numOfDays);

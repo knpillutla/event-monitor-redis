@@ -15,10 +15,10 @@ public interface OrderEventCounterService {
 
 	Map<String, Map<String, Long>> getOrderHourlyStats(String busName, Integer locnNbr, int numOfDays);
 
-	Map<String, Map<String, Long>> getTopPickPerformersByHourForPast24Hours(String busName, Integer locnNbr,
+	Map<String, Map<String, Long>> getTopPickPerformersByHour(String busName, Integer locnNbr,
 			Integer numOfDays, int numOfTopPerformers);
 
-	Map<String, Map<String, Long>> getTopPackPerformersByHourForPast24Hours(String busName, Integer locnNbr,
+	Map<String, Map<String, Long>> getTopPackPerformersByHour(String busName, Integer locnNbr,
 			Integer numOfDays, int numOfTopPerformers);
 
 	Map<String, Map<String, Long>> getTopPickPerformersForCurrentHour(String busName, Integer locnNbr);

@@ -10,5 +10,5 @@ import lombok.extern.slf4j.Slf4j;
 
 public interface PickEventCounterService {
 	public void updatePickCounts(WMSEvent event);
-	public CounterStat getPickCounts(String busName, Integer locnNbr);
+	public CounterStat getPickHeatMap(String busName, Integer locnNbr);
 }
